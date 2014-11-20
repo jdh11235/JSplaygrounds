@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>autosave-notepad</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#notepad {
+			position: fixed;
+			top: 1%;
+			left: 1%;
+			width: 98%;
+			height: 98%;
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<textarea id="notepad" placeholder="type notes here" oninput="update()"></textarea>
+
+	<script>
+		var notepad = document.getElementById('notepad');
+		if (localStorage.notes) notepad.value = localStorage.notes;
+
+		function save() {
+			localStorage.notes = notepad.value;
+		}
+
+		function update(event) {
+			save();
+		}
+	</script>
+</body>
+</html>
