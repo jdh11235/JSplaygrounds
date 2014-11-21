@@ -57,7 +57,7 @@ more info:
 	<div>
 		<input type="text" id="markletName" oninput="processName()" placeholder="rename bookmarklet">
 		<br><br>
-		<a href="javascript:{};void(0)" id="markletButton" class="marklet"></a>
+		<a href="javascript:(function(){})()" id="markletButton" class="marklet"></a>
 	</div>
 
 	<br><br>
@@ -84,7 +84,7 @@ more info:
 		function loadBoxes() {
 			if (!localStorage.inputBox) localStorage.inputBox = '';
 			if (localStorage.markletName) markletName.value = localStorage.markletName;
-			if (!localStorage.markletScript) localStorage.markletScript = 'javascript:{};void(0)';
+			if (!localStorage.markletScript) localStorage.markletScript = 'javascript:(function(){})()';
 
 			processName();
 			inputBox.value = localStorage.inputBox;
@@ -136,7 +136,7 @@ more info:
 
 			//wrap into JavaScript URL
 //			text = 'javascript:{' + text + '};void(0)';
-			text = 'javascript:(function(){' + text + '})();';
+			text = 'javascript:(function(){' + text + '})()';
 
 			return text;
 		}
