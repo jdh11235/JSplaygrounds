@@ -116,6 +116,7 @@ more info:
 
 		function processName() {
 			var name = markletName.value;
+			localStorage.markletName = name;
 			if (!name) name = 'Bookmarklet';
 			displayName(name);
 		}
