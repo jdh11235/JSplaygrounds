@@ -36,10 +36,6 @@ more info:
 			display: inline-block;
 		}
 
-		br.puffy {
-			margin-bottom: 1em;
-		}
-
 		.info {
 			color: brown;
 		}
@@ -60,11 +56,11 @@ more info:
 	<i>bookmarklet (drag to your Bookmarks Bar) =></i>
 	<div>
 		<input type="text" id="markletName" oninput="processName()" placeholder="rename bookmarklet">
-		<br class="puffy">
+		<br><br>
 		<a href="javascript:{};void(0)" id="markletButton" class="marklet"></a>
 	</div>
 
-	<br class="puffy">
+	<br><br>
 
 	<i>processed bookmarklet source =></i>
 	<textarea id="outputBox" placeholder="processed marklet source output"></textarea>
