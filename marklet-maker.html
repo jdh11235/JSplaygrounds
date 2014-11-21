@@ -1,0 +1,78 @@
+<!-- Copyright (c) 2014 Jonathan Herman - MIT License (http://opensource.org/licenses/MIT) -->
+<!--
+originally from:
+	http://jdh11235.github.io/jsplaygrounds/marklet-maker.html
+more info:
+	http://github.com/jdh11235/JSplaygrounds
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>marklet-maker</title>
+
+	<style>
+		a {
+			background-color: black;
+			color: lime;
+			padding: 0.5em;
+		}
+	</style>
+</head>
+<body>
+	<textarea id="inputBox" placeholder="put script here"></textarea>
+	<button onclick="processScript()">Process</button>
+
+	<hr>
+
+	<textarea id="outputBox" placeholder="processed marklet source output"></textarea>
+
+	<br style="margin-bottom: 1em;">
+
+	<i>bookmarklet (drag to your Bookmarks Bar)</i>
+	<a href="#" id="markletButton"></a>
+	<input type="text" id="markletName" oninput="processName()" placeholder="Marklet (rename)">
+
+	<script>
+		var inputBox = document.getElementById('inputBox'),
+			outputBox = document.getElementById('outputBox'),
+			markletName = document.getElementById('markletName'),
+			markletButton = document.getElementById('markletButton');
+		//TODO: save textboxes in localStorage
+		processName();
+		processScript();
+
+		function displayName(name) {
+			markletButton.innerHTML = name;
+		}
+
+		function processName() {
+			var name = markletName.value;
+			if (!name) name = 'Marklet';
+			displayName(name);
+		}
+
+		function displayMarklet(text) {
+			outputBox.value = text;
+			markletButton.href = text;
+		}
+
+		function formatMarklet(text) {
+
+			//TODO: replace whitespace and newlines with %20
+			//TODO: remove comments
+			text = 'javascript:{' + text + '};void(0)';
+
+			return text;
+		}
+
+		function processScript() {
+			var text = formatMarklet(inputBox.value);
+			displayMarklet(text);
+		}
+	</script>
+</body>
+</html>
