@@ -29,10 +29,17 @@ more info:
 			padding: 0.5em;
 		}
 
-		#editorStatus {
-			color: lime;
+		.message {
 			display: inline-block;
 			margin: 0 1em;
+		}
+
+		#editorStatus {
+			color: lime;
+		}
+
+		#linkError {
+			color: red;
 		}
 
 		div {
@@ -60,7 +67,8 @@ more info:
 
 	<button onclick="processScript()">Process</button>
 	<button onclick="clearScript()">Clear</button>
-	<p id="editorStatus"></p>
+	<p class="message" id="editorStatus"></p>
+	<p class="message" id="linkError"></p>
 
 	<hr>
 
@@ -89,6 +97,7 @@ more info:
 			$markletName = document.getElementById('markletName'),
 			$markletButton = document.getElementById('markletButton'),
 			$editorStatus = document.getElementById('editorStatus'),
+			$linkError = document.getElementById('linkError'),
 			$sharingLink = document.getElementById('sharingLink');
 
 		window.onload = init;
@@ -152,9 +161,7 @@ more info:
 				localStorage.markletName = obj.markletName;
 				localStorage.markletScript = obj.markletScript;
 			} catch (e) {
-
-				//TODO: display error status (new 'invalid link' message box, which oninput resets like the 'done' message box)
-				console.log(e);
+				displayLinkError('Link is incomplete', 1500);
 			}
 		}
 
@@ -225,6 +232,19 @@ more info:
 		function displayStatus() {
 			if (!localStorage.editorStatus) localStorage.editorStatus = '';
 			$editorStatus.innerHTML = localStorage.editorStatus;
+		}
+
+		function doLinkError(message) {
+			$linkError.innerHTML = message;
+		}
+
+		function undoLinkError() {
+			$linkError.innerHTML = '';
+		}
+
+		function displayLinkError (message, duration) {
+			doLinkError(message);
+			setTimeout(undoLinkError, duration);
 		}
 
 		function doStatus() {
