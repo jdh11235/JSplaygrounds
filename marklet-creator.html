@@ -87,7 +87,8 @@ more info:
 			$outputBox = document.getElementById('outputBox'),
 			$markletName = document.getElementById('markletName'),
 			$markletButton = document.getElementById('markletButton'),
-			$editorStatus = document.getElementById('editorStatus');
+			$editorStatus = document.getElementById('editorStatus'),
+			$sharingLink = document.getElementById('sharingLink');
 
 		window.onload = init;
 		window.onhashchange = checkHash;
@@ -111,19 +112,29 @@ more info:
 			if (location.hash === '') {
 				setHash('');
 			}
-			if (getHash() ) {
-				processHash(getHash() );
+			if (getHash()) {
+				processHash(getHash());
 				setHash('');
 			}
 		}
 
-		function displayHash(obj) {
+		function displayHash(obj) { //TODO: call this when stuff changes
 			var hash = JSON.stringify(obj);
-
+			if (hash == '{}') {
+				hash = '';
+			}
+			var URL = 'http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#' + hash;
+			$sharingLink.href = URL;
+			$sharingLink.innerHTML = URL;
 		}
 
 		function processHash(hash) {
-			console.log(hash)
+			console.log(hash); //TODO: set boxes
+			try {
+				var obj = JSON.parse(hash);
+			} catch (e) {
+				//TODO: error status (new statusError message box)
+			}
 		}
 
 		function loadBoxes() {
