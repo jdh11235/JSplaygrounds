@@ -44,9 +44,9 @@ more info:
 <body>
 	<center>
 		<p>
-			copy this link to share your script
+			copy this link to share your bookmarklet
 			<br>
-			<a href="http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#" id="sharingLink">http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#</a>
+			<a class="info" href="http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#" id="sharingLink">http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#</a>
 		</p>
 	</center>
 
@@ -78,7 +78,7 @@ more info:
 	<hr>
 
 	<center>
-		<a  class="info" href="http://github.com/jdh11235/JSplaygrounds">More Info...</a>
+		<a class="info" href="http://github.com/jdh11235/JSplaygrounds">More Info...</a>
 	</center>
 
 
@@ -94,10 +94,9 @@ more info:
 		window.onhashchange = checkHash;
 
 		function init() {
-			loadBoxes();
-			displayStatus();
-			consoleMessages();
 			checkHash();
+			loadBoxes();
+			consoleMessages();
 		}
 
 		function getHash() {
@@ -113,27 +112,45 @@ more info:
 				setHash('');
 			}
 			if (getHash()) {
-				processHash(getHash());
+				loadHash(getHash());
 				setHash('');
 			}
 		}
 
-		function displayHash(obj) { //TODO: call this when stuff changes
-			var hash = JSON.stringify(obj);
-			if (hash == '{}') {
-				hash = '';
-			}
+		function updateHash() {
+			var hash = createHashURL({
+				'alternateWrapper': localStorage.alternateWrapper,
+				'inputBox': localStorage.inputBox,
+				'markletName': localStorage.markletName,
+				'markletScript': localStorage.markletScript
+			});
+
 			var URL = 'http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#' + hash;
 			$sharingLink.href = URL;
 			$sharingLink.innerHTML = URL;
 		}
 
-		function processHash(hash) {
-			console.log(hash); //TODO: set boxes
+		function createHashURL(obj) {
+			var defaultHash = '{"alternateWrapper":"","inputBox":"","markletName":"","markletScript":"javascript:(function(){})()"}'
+			var hash = JSON.stringify(obj);
+			if (hash == defaultHash) {
+				hash = '';
+			}
+			return hash;
+		}
+
+		function loadHash(hash) {
 			try {
 				var obj = JSON.parse(hash);
+
+				localStorage.alternateWrapper = obj.alternateWrapper;
+				localStorage.inputBox = obj.inputBox;
+				localStorage.markletName = obj.markletName;
+				localStorage.markletScript = obj.markletScript;
 			} catch (e) {
-				//TODO: error status (new statusError message box)
+
+				//TODO: display error status (new statusError message box, which oninput resets like the 'done' message box)
+				console.log(e);
 			}
 		}
 
@@ -145,6 +162,7 @@ more info:
 			processName();
 			$inputBox.value = localStorage.inputBox;
 			displayMarklet(localStorage.markletScript);
+			displayStatus();
 		}
 
 		function consoleMessages() {
@@ -157,27 +175,43 @@ more info:
 		}
 
 		function alternateWrapper(state) {
+			function message(val) {
+				if (val) {
+					console.log ('currently wrapping marklet with:\n    javascript:{ script };void(0)');
+				} else {
+					console.log('currently wrapping marklet with:\n    javascript:(function(){ script })()');
+				}
+			}
 			if (state === undefined) {
 				if (localStorage.alternateWrapper) {
 					localStorage.alternateWrapper = '';
-					return false;
+					val = false;
+					message(val);
+					return val;
 				} else {
 					localStorage.alternateWrapper = true;
-					return true;
+					val = true;
+					message(val);
+					return val;
 				}
 			}
 			if (state === true) {
 				localStorage.alternateWrapper = true;
-				return true;
+				val = true;
+				message(val);
+				return val;
 			}
 			if (state === false) {
 				localStorage.alternateWrapper = '';
-				return false;
+				val = false;
+				message(val);
+				return val;
 			}
 		}
 
 		function saveInputBox() {
 			localStorage.inputBox = $inputBox.value;
+			updateHash();
 		}
 
 		function displayName(name) {
@@ -202,6 +236,7 @@ more info:
 		function processName() {
 			var name = $markletName.value;
 			localStorage.markletName = name;
+			updateHash();
 			if (!name) name = 'Bookmarklet';
 			displayName(name);
 		}
@@ -233,10 +268,12 @@ more info:
 			var text = markletify($inputBox.value);
 			displayMarklet(text);
 			localStorage.markletScript = text;
+			updateHash();
 			doStatus();
 		}
 
 		function clearScript() {
+			alternateWrapper(false);
 			$inputBox.value = '';
 			saveInputBox();
 			processScript();
