@@ -27,29 +27,50 @@ more info:
 			display: inline-block;
 			margin: 0 1em;
 		}
+
+		div {
+			display: inline-block;
+		}
+
+		br.puffy {
+			margin-bottom: 1em;
+		}
+
+		.info {
+			color: brown;
+		}
 	</style>
 </head>
 <body>
-	<textarea id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="put JavaScript here"></textarea>
+	<i>JavaScript =&gt;</i>
+	<textarea id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="type, paste, or drag-and-drop a file"></textarea>
+
 	<button onclick="processScript()">Process</button>
 	<button onclick="clearScript()">Clear</button>
 	<p id="editorStatus"></p>
 
+	<p class="info">(drag-and-drop does not work yet)</p>
+
 	<hr>
 
+	<i>bookmarklet (drag to your Bookmarks Bar) =></i>
+	<div>
+		<input type="text" id="markletName" oninput="processName()" placeholder="rename bookmarklet">
+		<br class="puffy">
+		<a href="javascript:{};void(0)" id="markletButton" class="marklet"></a>
+	</div>
+
+	<br class="puffy">
+
+	<i>processed bookmarklet source =></i>
 	<textarea id="outputBox" placeholder="processed marklet source output"></textarea>
-
-	<br style="margin-bottom: 1em;">
-
-	<i>bookmarklet (drag to your Bookmarks Bar)</i>
-	<input type="text" id="markletName" oninput="processName()" placeholder="rename bookmarklet">
-	<a href="javascript:{};void(0)" id="markletButton" class="marklet"></a>
 
 	<hr>
 
 	<center>
-		<a href="http://github.com/jdh11235/JSplaygrounds">More Info...</a>
+		<a  class="info" href="http://github.com/jdh11235/JSplaygrounds">More Info...</a>
 	</center>
+
 
 	<script>
 		var inputBox = document.getElementById('inputBox'),
