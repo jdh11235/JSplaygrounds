@@ -21,13 +21,19 @@ more info:
 			padding: 0.5em;
 			font-family: sans-serif;
 		}
+
+		#editorStatus {
+			color: lime;
+			display: inline-block;
+			margin: 0 1em;
+		}
 	</style>
 </head>
 <body>
-	<textarea id="inputBox" placeholder="put JavaScript here"></textarea>
-
+	<textarea id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="put JavaScript here"></textarea>
 	<button onclick="processScript()">Process</button>
 	<button onclick="clearScript()">Clear</button>
+	<p id="editorStatus"></p>
 
 	<hr>
 
@@ -37,7 +43,7 @@ more info:
 
 	<i>bookmarklet (drag to your Bookmarks Bar)</i>
 	<input type="text" id="markletName" oninput="processName()" placeholder="rename bookmarklet">
-	<a href="#" id="markletButton" class="marklet"></a>
+	<a href="javascript:{};void(0)" id="markletButton" class="marklet"></a>
 
 	<hr>
 
@@ -49,13 +55,42 @@ more info:
 		var inputBox = document.getElementById('inputBox'),
 			outputBox = document.getElementById('outputBox'),
 			markletName = document.getElementById('markletName'),
-			markletButton = document.getElementById('markletButton');
-		//TODO: save inputBox and markletName in localStorage
-		processName();
-		processScript();
+			markletButton = document.getElementById('markletButton'),
+			editorStatus = document.getElementById('editorStatus');
+		loadBoxes();
+		displayStatus();
+
+		function loadBoxes() {
+			if (!localStorage.inputBox) localStorage.inputBox = '';
+			if (localStorage.markletName) markletName.value = localStorage.markletName;
+			if (!localStorage.markletScript) localStorage.markletScript = '';
+
+			processName();
+			inputBox.value = localStorage.inputBox;
+			displayMarklet(localStorage.markletScript);
+		}
+
+		function saveInputBox() {
+			localStorage.inputBox = inputBox.value;
+		}
 
 		function displayName(name) {
 			markletButton.innerHTML = name;
+		}
+
+		function displayStatus() {
+			if (!localStorage.editorStatus) localStorage.editorStatus = '';
+			editorStatus.innerHTML = localStorage.editorStatus;
+		}
+
+		function doStatus() {
+			localStorage.editorStatus = 'done!';
+			displayStatus();
+		}
+
+		function undoStatus() {
+			localStorage.editorStatus = '';
+			displayStatus();
 		}
 
 		function processName() {
@@ -86,11 +121,15 @@ more info:
 		function processScript() {
 			var text = markletify(inputBox.value);
 			displayMarklet(text);
+			localStorage.markletScript = text;
+			doStatus();
 		}
 
 		function clearScript() {
 			inputBox.value = '';
+			saveInputBox();
 			processScript();
+			undoStatus();
 		}
 	</script>
 </body>
