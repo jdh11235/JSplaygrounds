@@ -28,10 +28,20 @@ more info:
 			height: 98%;
 			font-family: sans-serif;
 		}
+
+		.info {
+			position: fixed;
+			bottom: 0;
+			padding: 0.5em;
+			color: white;
+			background-color: brown;
+		}
 	</style>
 </head>
 <body>
 	<textarea id="notepad" placeholder="type notes here" oninput="update()"></textarea>
+
+	<a class="info" href="http://github.com/jdh11235/JSplaygrounds">More Info...</a>
 
 	<script>
 		var notepad = document.getElementById('notepad');
