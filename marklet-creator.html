@@ -135,7 +135,8 @@ more info:
 			text = encodeURIComponent(text);
 
 			//wrap into JavaScript URL
-			text = 'javascript:{' + text + '};void(0)';
+//			text = 'javascript:{' + text + '};void(0)';
+			text = 'javascript:(function(){' + text + '})();';
 
 			return text;
 		}
