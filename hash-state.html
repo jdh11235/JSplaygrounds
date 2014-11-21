@@ -13,6 +13,12 @@ more info:
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>hash-state</title>
+
+	<style>
+		.info {
+			color: brown;
+		}
+	</style>
 </head>
 <body>
 	<input type="text" id="input" oninput="setHash($input.value)" autofocus>
@@ -23,6 +29,11 @@ more info:
 		parsed JSON: <code id="JSONoutput"></code>
 	</p>
 
+	<hr>
+
+	<center>
+		<a class="info" href="http://github.com/jdh11235/JSplaygrounds">More Info...</a>
+	</center>
 
 	<script>
 		var $input = document.getElementById('input'),
