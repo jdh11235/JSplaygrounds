@@ -24,7 +24,9 @@ more info:
 </head>
 <body>
 	<textarea id="inputBox" placeholder="put JavaScript here"></textarea>
+
 	<button onclick="processScript()">Process</button>
+	<button onclick="clearScript()">Clear</button>
 
 	<hr>
 
@@ -78,6 +80,11 @@ more info:
 		function processScript() {
 			var text = markletify(inputBox.value);
 			displayMarklet(text);
+		}
+
+		function clearScript() {
+			inputBox.value = '';
+			processScript();
 		}
 	</script>
 </body>
