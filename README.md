@@ -5,9 +5,14 @@ JSplaygrounds
 
 These are all self-contained HTML pages, and will work on their own if downloaded.
 
-Here are the hosted versions, which you can play with right now!
+Or, just start playing with them!
 
-####marklet-creator:
+**autosave-notepad:**
+
+http://jdh11235.github.io/JSplaygrounds/autosave-notepad.html
+
+**marklet-creator:**
+
 http://jdh11235.github.io/JSplaygrounds/marklet-creator.html
 
 ___
