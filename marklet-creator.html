@@ -42,23 +42,14 @@ more info:
 		.info {
 			color: brown;
 		}
-
-		#sharingLinkContainer {
-			overflow: hidden;
-			max-height: 1em;
-		}
-
-		#sharingLinkContainer:hover {
-			overflow: visible;
-		}
 	</style>
 </head>
 <body>
 	<center>
-		<p>copy this link to share your bookmarklet</p>
-
-		<p id="sharingLinkContainer">
-			<a href="http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#" id="sharingLink" class="info">http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#</a>
+		<p>
+			copy this link to share your bookmarklet =&gt;
+			<input type="text" id="sharingLink" class="info" value="http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#" readonly></input>
+<!--	onfocus = selectall-->
 		</p>
 	</center>
 
@@ -84,7 +75,7 @@ more info:
 	<br><br>
 
 	<i>processed bookmarklet source =&gt;</i>
-	<textarea id="outputBox" placeholder="processed marklet source output"></textarea>
+	<textarea id="outputBox" placeholder="processed marklet source output" oninput="saveScript()"></textarea>
 
 	<hr>
 
@@ -141,8 +132,7 @@ more info:
 		}
 
 		function displaySharingLink(URL) {
-			$sharingLink.href = URL;
-			$sharingLink.innerHTML = URL;
+			$sharingLink.value = URL;
 		}
 
 		function createHashURL(obj) {
@@ -164,7 +154,7 @@ more info:
 				localStorage.markletScript = obj.markletScript;
 			} catch (e) {
 
-				//TODO: display error status (new statusError message box, which oninput resets like the 'done' message box)
+				//TODO: display error status (new 'invalid link' message box, which oninput resets like the 'done' message box)
 				console.log(e);
 			}
 		}
@@ -277,6 +267,13 @@ more info:
 			}
 
 			return text;
+		}
+
+		function saveScript() {
+			var text = $outputBox.value;
+			localStorage.markletScript = text;
+			displayMarklet(text);
+			updateHash();
 		}
 
 		function processScript() {
