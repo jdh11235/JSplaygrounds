@@ -63,7 +63,7 @@ more info:
 		function loadBoxes() {
 			if (!localStorage.inputBox) localStorage.inputBox = '';
 			if (localStorage.markletName) markletName.value = localStorage.markletName;
-			if (!localStorage.markletScript) localStorage.markletScript = '';
+			if (!localStorage.markletScript) localStorage.markletScript = 'javascript:{};void(0)';
 
 			processName();
 			inputBox.value = localStorage.inputBox;
