@@ -48,16 +48,15 @@ more info:
 	<center>
 		<p>
 			copy this link to share your bookmarklet =&gt;
-			<input type="text" id="sharingLink" class="info" value="http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#" readonly></input>
-<!--	onfocus = selectall-->
+			<input autocomplete="off" type="text" id="sharingLink" class="info" value="http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#" readonly onfocus="$sharingLink.select()" onclick="$sharingLink.select()">
 		</p>
 	</center>
 
 	<hr>
 
 	<i>JavaScript =&gt;</i>
-	<textarea id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="type or paste code"></textarea>
-<!--	<textarea id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="type code, paste code, or drag-and-drop a file"></textarea>-->
+	<textarea autocomplete="off" id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="type or paste code"></textarea>
+<!--	<textarea autocomplete="off" id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="type code, paste code, or drag-and-drop a file"></textarea>-->
 
 	<button onclick="processScript()">Process</button>
 	<button onclick="clearScript()">Clear</button>
@@ -67,7 +66,7 @@ more info:
 
 	<i>bookmarklet (drag to your Bookmarks Bar) =&gt;</i>
 	<div>
-		<input type="text" id="markletName" oninput="processName()" placeholder="Rename bookmarklet">
+		<input autocomplete="off" type="text" id="markletName" oninput="processName()" placeholder="Rename bookmarklet">
 		<br><br>
 		<a href="javascript:(function(){})()" id="markletButton" class="marklet"></a>
 	</div>
@@ -75,7 +74,7 @@ more info:
 	<br><br>
 
 	<i>processed bookmarklet source =&gt;</i>
-	<textarea id="outputBox" placeholder="processed marklet source output" oninput="saveScript()"></textarea>
+	<textarea autocomplete="off" id="outputBox" placeholder="processed marklet source output" oninput="saveScript()"></textarea>
 
 	<hr>
 
