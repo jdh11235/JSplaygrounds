@@ -48,24 +48,28 @@ more info:
 		}
 
 		function refreshInput() {
-			displayHash();
 			$input.value = getHash();
+			displayHash();
 		}
 
 		function displayHash() {
 			var hash = getHash();
 			$output.innerHTML = hash;
-			$JSONoutput.innerHTML = JSON.stringify(JSON.parse(hash));
+			try {
+				$JSONoutput.innerHTML = JSON.stringify(JSON.parse(hash));
+			} catch (e) {
+				$JSONoutput.innerHTML = e;
+			}
 		}
 
 		//TODO: on hash change
 
 		function getHash() {
-			return location.hash.substring(1);
+			return decodeURIComponent(location.hash.substring(1));
 		}
 
 		function setHash(hash) {
-			location.hash = hash;
+			location.hash = encodeURIComponent(hash);
 			displayHash();
 		}
 	</script>
