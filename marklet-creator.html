@@ -105,15 +105,19 @@ more info:
 			if (state === undefined) {
 				if (localStorage.alternateWrapper) {
 					localStorage.alternateWrapper = '';
+					return false;
 				} else {
 					localStorage.alternateWrapper = true;
+					return true;
 				}
 			}
 			if (state === true) {
 				localStorage.alternateWrapper = true;
+				return true;
 			}
 			if (state === false) {
 				localStorage.alternateWrapper = '';
+				return false;
 			}
 		}
 
