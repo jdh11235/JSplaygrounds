@@ -42,6 +42,16 @@ more info:
 	</style>
 </head>
 <body>
+	<center>
+		<p>
+			copy this link to share your script
+			<br>
+			<a href="http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#" id="sharingLink">http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#</a>
+		</p>
+	</center>
+
+	<hr>
+
 	<i>JavaScript =&gt;</i>
 	<textarea id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="type code, paste code, or drag-and-drop a file"></textarea>
 
@@ -78,9 +88,42 @@ more info:
 			markletName = document.getElementById('markletName'),
 			markletButton = document.getElementById('markletButton'),
 			editorStatus = document.getElementById('editorStatus');
-		loadBoxes();
-		displayStatus();
-		consoleMessages();
+
+		window.onload = init;
+		window.onhashchange = checkHash;
+
+		function init() {
+			loadBoxes();
+			displayStatus();
+			consoleMessages();
+			checkHash();
+		}
+
+		function getHash() {
+			return decodeURIComponent(location.hash.substring(1));
+		}
+
+		function setHash(hash) {
+			location.hash = encodeURIComponent(hash);
+		}
+
+		function checkHash() {
+			if (location.hash === '') {
+				setHash('');
+			}
+			if (getHash() ) {
+				processHash(getHash() );
+				setHash('');
+			}
+		}
+
+		function displayHash(obj) {
+
+		}
+
+		function processHash(hash) {
+			console.log(hash)
+		}
 
 		function loadBoxes() {
 			if (!localStorage.inputBox) localStorage.inputBox = '';
