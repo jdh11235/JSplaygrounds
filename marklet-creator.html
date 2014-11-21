@@ -15,6 +15,10 @@ more info:
 	<title>marklet-creator</title>
 
 	<style>
+		body {
+			font-family: sans-serif;
+		}
+
 		textarea {
 			min-height: 4em;
 		}
@@ -23,7 +27,6 @@ more info:
 			background-color: black;
 			color: lime;
 			padding: 0.5em;
-			font-family: sans-serif;
 		}
 
 		#editorStatus {
@@ -39,33 +42,41 @@ more info:
 		.info {
 			color: brown;
 		}
+
+		#sharingLinkContainer {
+			overflow: hidden;
+			max-height: 1em;
+		}
+
+		#sharingLinkContainer:hover {
+			overflow: visible;
+		}
 	</style>
 </head>
 <body>
 	<center>
-		<p>
-			copy this link to share your bookmarklet
-			<br>
-			<a class="info" href="http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#" id="sharingLink">http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#</a>
+		<p>copy this link to share your bookmarklet</p>
+
+		<p id="sharingLinkContainer">
+			<a href="http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#" id="sharingLink" class="info">http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#</a>
 		</p>
 	</center>
 
 	<hr>
 
 	<i>JavaScript =&gt;</i>
-	<textarea id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="type code, paste code, or drag-and-drop a file"></textarea>
+	<textarea id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="type or paste code"></textarea>
+<!--	<textarea id="inputBox" oninput="undoStatus(); saveInputBox()" placeholder="type code, paste code, or drag-and-drop a file"></textarea>-->
 
 	<button onclick="processScript()">Process</button>
 	<button onclick="clearScript()">Clear</button>
 	<p id="editorStatus"></p>
 
-	<p class="info">(file drag-and-drop is not yet implemented)</p>
-
 	<hr>
 
 	<i>bookmarklet (drag to your Bookmarks Bar) =&gt;</i>
 	<div>
-		<input type="text" id="markletName" oninput="processName()" placeholder="rename bookmarklet">
+		<input type="text" id="markletName" oninput="processName()" placeholder="Rename bookmarklet">
 		<br><br>
 		<a href="javascript:(function(){})()" id="markletButton" class="marklet"></a>
 	</div>
@@ -126,6 +137,10 @@ more info:
 			});
 
 			var URL = 'http://jdh11235.github.io/JSplaygrounds/marklet-creator.html#' + hash;
+			displaySharingLink(URL);
+		}
+
+		function displaySharingLink(URL) {
 			$sharingLink.href = URL;
 			$sharingLink.innerHTML = URL;
 		}
