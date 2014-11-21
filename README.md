@@ -13,11 +13,15 @@ Or, just start playing with them!
 
 http://jdh11235.github.io/JSplaygrounds/marklet-creator.html
 
-####Experiments
+####Concept Examples
 
 **autosave-notepad:** saves and loads textarea state using localStorage
 
 http://jdh11235.github.io/JSplaygrounds/autosave-notepad.html
+
+**hash-state**: syncs textbox with URL hash
+
+http://jdh11235.github.io/JSplaygrounds/hash-state.html
 
 ___
 
