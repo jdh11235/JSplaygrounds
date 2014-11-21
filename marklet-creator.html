@@ -71,8 +71,13 @@ more info:
 
 		function markletify(text) {
 
-			//TODO: remove comments
-			//TODO: replace whitespace and newlines with %20
+			//remove single-line comments
+			text = text.replace(/\/\/.*[\n\r]*/g, '');
+
+			//replace whitespace and newlines with %20
+			text = text.replace(/\s+/g, '%20');
+
+			//wrap into JavaScript URL
 			text = 'javascript:{' + text + '};void(0)';
 
 			return text;
