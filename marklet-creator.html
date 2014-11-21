@@ -83,11 +83,11 @@ more info:
 
 
 	<script>
-		var inputBox = document.getElementById('inputBox'),
-			outputBox = document.getElementById('outputBox'),
-			markletName = document.getElementById('markletName'),
-			markletButton = document.getElementById('markletButton'),
-			editorStatus = document.getElementById('editorStatus');
+		var $inputBox = document.getElementById('inputBox'),
+			$outputBox = document.getElementById('outputBox'),
+			$markletName = document.getElementById('markletName'),
+			$markletButton = document.getElementById('markletButton'),
+			$editorStatus = document.getElementById('editorStatus');
 
 		window.onload = init;
 		window.onhashchange = checkHash;
@@ -118,6 +118,7 @@ more info:
 		}
 
 		function displayHash(obj) {
+			var hash = JSON.stringify(obj);
 
 		}
 
@@ -127,11 +128,11 @@ more info:
 
 		function loadBoxes() {
 			if (!localStorage.inputBox) localStorage.inputBox = '';
-			if (localStorage.markletName) markletName.value = localStorage.markletName;
+			if (localStorage.markletName) $markletName.value = localStorage.markletName;
 			if (!localStorage.markletScript) localStorage.markletScript = 'javascript:(function(){})()';
 
 			processName();
-			inputBox.value = localStorage.inputBox;
+			$inputBox.value = localStorage.inputBox;
 			displayMarklet(localStorage.markletScript);
 		}
 
@@ -165,16 +166,16 @@ more info:
 		}
 
 		function saveInputBox() {
-			localStorage.inputBox = inputBox.value;
+			localStorage.inputBox = $inputBox.value;
 		}
 
 		function displayName(name) {
-			markletButton.innerHTML = name;
+			$markletButton.innerHTML = name;
 		}
 
 		function displayStatus() {
 			if (!localStorage.editorStatus) localStorage.editorStatus = '';
-			editorStatus.innerHTML = localStorage.editorStatus;
+			$editorStatus.innerHTML = localStorage.editorStatus;
 		}
 
 		function doStatus() {
@@ -188,15 +189,15 @@ more info:
 		}
 
 		function processName() {
-			var name = markletName.value;
+			var name = $markletName.value;
 			localStorage.markletName = name;
 			if (!name) name = 'Bookmarklet';
 			displayName(name);
 		}
 
 		function displayMarklet(text) {
-			outputBox.value = text;
-			markletButton.href = text;
+			$outputBox.value = text;
+			$markletButton.href = text;
 		}
 
 		function markletify(text) {
@@ -218,14 +219,14 @@ more info:
 		}
 
 		function processScript() {
-			var text = markletify(inputBox.value);
+			var text = markletify($inputBox.value);
 			displayMarklet(text);
 			localStorage.markletScript = text;
 			doStatus();
 		}
 
 		function clearScript() {
-			inputBox.value = '';
+			$inputBox.value = '';
 			saveInputBox();
 			processScript();
 			undoStatus();
