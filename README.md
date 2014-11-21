@@ -7,13 +7,17 @@ These are all self-contained HTML pages, and will work on their own if downloade
 
 Or, just start playing with them!
 
-**autosave-notepad:**
+####Apps
 
-http://jdh11235.github.io/JSplaygrounds/autosave-notepad.html
-
-**marklet-creator:**
+**marklet-creator:** a bookmarklet editor.
 
 http://jdh11235.github.io/JSplaygrounds/marklet-creator.html
+
+####Experiments
+
+**autosave-notepad:** saves and loads textarea state using localStorage
+
+http://jdh11235.github.io/JSplaygrounds/autosave-notepad.html
 
 ___
 
