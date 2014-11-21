@@ -8,7 +8,7 @@ These are all self-contained HTML pages, and will work on their own if downloade
 Here are the hosted versions, which you can play with right now!
 
 ####marklet-creator:
-http://jdh11235.github.io/JSplayground/marklet-creator.html
+http://jdh11235.github.io/JSplaygrounds/marklet-creator.html
 
 ___
 
