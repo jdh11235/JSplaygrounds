@@ -1,7 +1,7 @@
 JSplaygrounds
 =============
 
-set-up environments for testing JavaScript ideas
+environments for testing JavaScript ideas
 
 ___
 
