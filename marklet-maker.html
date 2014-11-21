@@ -35,7 +35,7 @@ more info:
 	<br style="margin-bottom: 1em;">
 
 	<i>bookmarklet (drag to your Bookmarks Bar)</i>
-	<input type="text" id="markletName" oninput="processName()" placeholder="Marklet (rename)">
+	<input type="text" id="markletName" oninput="processName()" placeholder="rename bookmarklet">
 	<a href="#" id="markletButton" class="marklet"></a>
 
 	<hr>
@@ -59,7 +59,7 @@ more info:
 
 		function processName() {
 			var name = markletName.value;
-			if (!name) name = 'Marklet';
+			if (!name) name = 'Bookmarklet';
 			displayName(name);
 		}
 
