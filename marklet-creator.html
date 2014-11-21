@@ -131,8 +131,8 @@ more info:
 			//remove single-line comments
 			text = text.replace(/\/\/.*[\n\r]*/g, '');
 
-			//replace whitespace and newlines with %20
-			text = text.replace(/\s+/g, '%20');
+			//encode special characters
+			text = encodeURIComponent(text);
 
 			//wrap into JavaScript URL
 			text = 'javascript:{' + text + '};void(0)';
