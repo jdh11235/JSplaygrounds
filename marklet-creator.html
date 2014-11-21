@@ -80,6 +80,7 @@ more info:
 			editorStatus = document.getElementById('editorStatus');
 		loadBoxes();
 		displayStatus();
+		consoleMessages();
 
 		function loadBoxes() {
 			if (!localStorage.inputBox) localStorage.inputBox = '';
@@ -89,6 +90,31 @@ more info:
 			processName();
 			inputBox.value = localStorage.inputBox;
 			displayMarklet(localStorage.markletScript);
+		}
+
+		function consoleMessages() {
+			var message = ['currently wrapping marklet with:\n    ', '\nto change, use:\n    toggle: alternateWrapper(), default: alternateWrapper(false), non-encapsulating: alternateWrapper(true)\nand click Process or Clear'];
+			if (localStorage.alternateWrapper) {
+				console.log(message[0] + 'javascript:{ script };void(0)' + message[1]);
+			} else {
+				console.log(message[0] + 'javascript:(function(){ script })()' + message[1]);
+			}
+		}
+
+		function alternateWrapper(state) {
+			if (state === undefined) {
+				if (localStorage.alternateWrapper) {
+					localStorage.alternateWrapper = '';
+				} else {
+					localStorage.alternateWrapper = true;
+				}
+			}
+			if (state === true) {
+				localStorage.alternateWrapper = true;
+			}
+			if (state === false) {
+				localStorage.alternateWrapper = '';
+			}
 		}
 
 		function saveInputBox() {
@@ -135,8 +161,11 @@ more info:
 			text = encodeURIComponent(text);
 
 			//wrap into JavaScript URL
-//			text = 'javascript:{' + text + '};void(0)';
-			text = 'javascript:(function(){' + text + '})()';
+			if (localStorage.alternateWrapper) {
+				text = 'javascript:{' + text + '};void(0)';
+			} else {
+				text = 'javascript:(function(){' + text + '})()';
+			}
 
 			return text;
 		}
