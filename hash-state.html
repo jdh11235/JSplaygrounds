@@ -15,6 +15,48 @@ http://github.com/jdh11235/JSplaygrounds
 	<title>hash-state</title>
 </head>
 <body>
+	<input type="text" id="input" oninput="setHash($input.value)" autofocus>
 
+	<p>
+		hash: <code id="output"></code>
+		<br>
+		parsed JSON: <code id="JSONoutput"></code>
+	</p>
+
+
+	<script>
+		var $input = document.getElementById('input'),
+			$output = document.getElementById('output'),
+			$JSONoutput = document.getElementById('JSONoutput');
+
+		window.onload = init;
+		window.onhashchange = refreshInput;
+
+		function init() {
+			refreshInput();
+		}
+
+		function refreshInput() {
+			displayHash();
+			$input.value = getHash();
+		}
+
+		function displayHash() {
+			var hash = getHash();
+			$output.innerHTML = hash;
+			$JSONoutput.innerHTML = JSON.stringify(JSON.parse(hash));
+		}
+
+		//TODO: on hash change
+
+		function getHash() {
+			return location.hash.substring(1);
+		}
+
+		function setHash(hash) {
+			location.hash = hash;
+			displayHash();
+		}
+	</script>
 </body>
 </html>
