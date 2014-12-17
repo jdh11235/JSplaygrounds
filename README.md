@@ -23,6 +23,10 @@ http://jdh11235.github.io/JSplaygrounds/autosave-notepad.html
 
 http://jdh11235.github.io/JSplaygrounds/hash-state.html
 
+**share-hash**: store data in URL hash to share it
+
+http://jdh11235.github.io/JSplaygrounds/share-hash.html
+
 ___
 
 Copyright (c) 2014 Jonathan Herman - MIT License
