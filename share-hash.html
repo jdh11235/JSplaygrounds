@@ -16,22 +16,48 @@
 
 	var $data = document.getElementById('data');
 
-	function getURLdata () {
-		return JSON.parse(decodeURIComponent(location.hash).substring(1));
-	}
-
-	function setURLdata (data) {
-		location.hash = encodeURIComponent(JSON.stringify(data));
-	}
-
-	function checkURLdata () {
-
-	}
-
 	function init () {
-		checkURL();
+		loadURLdata();
 	}
 
+	function newData (data) {
+		//TODO: add new tab with data
+		console.log(data);
+	}
+
+	function displayError (message) {
+		//TODO: show message in html
+		console.log(message);
+	}
+
+	function getURLdata () {
+		var data;
+		try {
+			data = JSON.parse(decodeURIComponent(location.hash).substring(1));
+		} catch (ERR) {
+			displayError(ERR);
+			return false;
+		}
+		return data;
+	}
+
+	function makeURLdata (data) {
+		return location.origin + location.pathname + '#' +
+			encodeURIComponent(JSON.stringify(data));
+	}
+
+	function loadURLdata () {
+		if (location.hash !== '') {
+			var data;
+			if (data = getURLdata()) {
+				newData(data);
+			}
+
+			location.hash = '';
+		}
+	}
+
+	window.onhashchange = loadURLdata;
 	window.onload = init;
 
 </script>
