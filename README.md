@@ -25,4 +25,4 @@ http://jdh11235.github.io/JSplaygrounds/hash-state.html
 
 ___
 
-Copyright (c) 2014 Jonathan Herman - MIT License (http://opensource.org/licenses/MIT)
+Copyright (c) 2014 Jonathan Herman - MIT License
