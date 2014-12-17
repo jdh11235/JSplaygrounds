@@ -121,7 +121,7 @@ more info:
 				setHash('');
 			}
 			if (getHash()) {
-				loadHash(getHash());
+				loadHash(getHash()); //FIXME: \n and " will cause JSON error, need to escape them
 				setHash('');
 			}
 			loadBoxes();
@@ -153,6 +153,9 @@ more info:
 		}
 
 		function loadHash(hash) {
+
+			//FIXME: write proper escape function
+			hash = hash.replace(/\\n/g, '\\\\n').replace(/\"/g, '\\"').replace(/\'/g, "\\'");
 			try {
 				var obj = JSON.parse(hash);
 
