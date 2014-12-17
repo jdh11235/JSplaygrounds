@@ -26,7 +26,7 @@ more info:
 	<p>
 		hash: <code id="output"></code>
 		<br>
-		parsed JSON: <code id="JSONoutput"></code>
+<!--		parsed JSON: <code id="JSONoutput"></code>-->
 	</p>
 
 	<hr>
@@ -36,9 +36,9 @@ more info:
 	</center>
 
 	<script>
-		var $input = document.getElementById('input'),
-			$output = document.getElementById('output'),
-			$JSONoutput = document.getElementById('JSONoutput');
+		var $input = document.getElementById('input');
+		var	$output = document.getElementById('output');
+//		var	$JSONoutput = document.getElementById('JSONoutput');
 
 		window.onload = init;
 		window.onhashchange = refreshInput;
@@ -55,14 +55,12 @@ more info:
 		function displayHash() {
 			var hash = getHash();
 			$output.innerHTML = hash;
-			try {
-				$JSONoutput.innerHTML = JSON.stringify(JSON.parse(hash));
-			} catch (e) {
-				$JSONoutput.innerHTML = e;
-			}
+//			try {
+//				$JSONoutput.innerHTML = JSON.stringify(JSON.parse(hash));
+//			} catch (e) {
+//				$JSONoutput.innerHTML = e;
+//			}
 		}
-
-		//TODO: on hash change
 
 		function getHash() {
 			return decodeURIComponent(location.hash.substring(1));
